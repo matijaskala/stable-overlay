@@ -1,20 +1,17 @@
-# Copyright 1999-2012 Gentoo Foundation
+# Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Id$
 
-EAPI=4
+EAPI=6
 
 DESCRIPTION="Compiz Option code Generator"
 HOMEPAGE="http://www.compiz.org/"
-SRC_URI="http://releases.compiz.org/${PV}/${P}.tar.bz2"
+SRC_URI="https://github.com/compiz-reloaded/${PN}/releases/download/v${PV}/${P}.tar.xz"
 
 LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS="amd64 ppc ppc64 x86"
-IUSE=""
+RESTRICT="mirror"
 
 RDEPEND="dev-libs/libxslt"
 DEPEND="${RDEPEND}
 	virtual/pkgconfig"
-
-DOCS="AUTHORS ChangeLog INSTALL NEWS README"
