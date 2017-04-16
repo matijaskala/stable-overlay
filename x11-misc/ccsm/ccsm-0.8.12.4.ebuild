@@ -1,6 +1,5 @@
-# Copyright 1999-2015 Gentoo Foundation
+# Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Id$
 
 EAPI="5"
 
@@ -10,7 +9,7 @@ inherit distutils-r1
 
 DESCRIPTION="Compizconfig Settings Manager"
 HOMEPAGE="http://www.compiz.org/"
-SRC_URI="http://releases.compiz.org/${PV}/${P}.tar.bz2"
+SRC_URI="https://github.com/compiz-reloaded/${PN}/releases/download/v${PV}/${P}.tar.xz"
 
 LICENSE="GPL-2"
 SLOT="0"
@@ -21,6 +20,9 @@ RDEPEND="
 	>=dev-python/pygtk-2.12:2[${PYTHON_USEDEP}]
 	gnome-base/librsvg
 "
+
+# missing icons and text fix, bug #487106
+PATCHES=( "${FILESDIR}/${P}-pygobject-glib-fix.patch" )
 
 DOCS=( AUTHORS )
 
