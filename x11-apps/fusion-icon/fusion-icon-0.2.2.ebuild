@@ -1,34 +1,30 @@
-# Copyright 1999-2015 Gentoo Foundation
+# Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Id$
 
 EAPI="5"
 PYTHON_COMPAT=( python2_7 )
 
 inherit distutils-r1 eutils gnome2-utils
 
-MINIMUM_COMPIZ_RELEASE=0.6.0
-
 DESCRIPTION="Compiz Fusion Tray Icon and Manager"
 HOMEPAGE="http://compiz.org"
-SRC_URI="mirror://gentoo/${P}.tar.gz"
+SRC_URI="https://github.com/compiz-reloaded/${PN}/releases/download/v${PV}/${P}.tar.xz"
 
 LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS="amd64 x86"
 IUSE="+gtk qt4"
+RESTRICT="mirror"
 
 REQUIRED_USE="|| ( gtk qt4 )"
 
 RDEPEND="
-	>=dev-python/compizconfig-python-${MINIMUM_COMPIZ_RELEASE}
-	>=x11-wm/compiz-${MINIMUM_COMPIZ_RELEASE}
+	>=dev-python/compizconfig-python-0.8.12
+	>=x11-wm/compiz-0.8.12
 	x11-apps/xvinfo
 	gtk? ( >=dev-python/pygtk-2.10:2[${PYTHON_USEDEP}] )
 	qt4? ( dev-python/PyQt4[X,${PYTHON_USEDEP}] )"
 DEPEND="${RDEPEND}"
-
-S="${WORKDIR}/${PN}"
 
 PATCHES=( "${FILESDIR}"/${P}-qt4-interface-subprocess-call.patch )
 
