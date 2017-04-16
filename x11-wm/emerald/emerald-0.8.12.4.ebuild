@@ -1,28 +1,25 @@
-# Copyright 1999-2013 Gentoo Foundation
+# Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Id$
 
-EAPI="4"
+EAPI=6
 
 inherit eutils flag-o-matic
 
-THEMES_RELEASE=0.5.2
-
 DESCRIPTION="Emerald Window Decorator"
 HOMEPAGE="http://www.compiz.org/"
-SRC_URI="http://releases.compiz.org/${PV}/${P}.tar.bz2"
+SRC_URI="https://github.com/compiz-reloaded/${PN}/releases/download/v${PV}/${P}.tar.xz"
 
 LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS="amd64 ppc ppc64 x86"
-IUSE=""
+RESTRICT="mirror"
 
-PDEPEND="~x11-themes/emerald-themes-${THEMES_RELEASE}"
+PDEPEND=">=x11-themes/emerald-themes-0.8.12"
 
 RDEPEND="
 	>=x11-libs/gtk+-2.8.0:2
 	>=x11-libs/libwnck-2.14.2:1
-	>=x11-wm/compiz-${PV}
+	>=x11-wm/compiz-0.8.12
 "
 
 DEPEND="${RDEPEND}
@@ -42,17 +39,11 @@ src_prepare() {
 	# Fix underlinking
 	append-libs -ldl -lm
 
-	epatch_user
+	eapply_user
 }
 
 src_configure() {
 	econf \
 		--disable-static \
-		--enable-fast-install \
 		--disable-mime-update
-}
-
-src_install() {
-	default
-	prune_libtool_files
 }
