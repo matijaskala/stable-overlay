@@ -14,15 +14,19 @@ SRC_URI="https://github.com/compiz-reloaded/${PN}/releases/download/v${PV}/${P}.
 LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS="amd64 ppc ppc64 x86"
+IUSE="gtk3"
 RESTRICT="mirror"
 
 DEPEND="
 	dev-util/intltool
 	virtual/pkgconfig"
 RDEPEND="
-	>=dev-python/compizconfig-python-${PV}[${PYTHON_USEDEP}]
-	>=dev-python/pygtk-2.10:2[${PYTHON_USEDEP}]
-	>=x11-misc/ccsm-${PV}[${PYTHON_USEDEP}]
+	>=dev-python/compizconfig-python-0.8[${PYTHON_USEDEP}]
+	<dev-python/compizconfig-python-0.9
+	dev-python/pycairo[${PYTHON_USEDEP}]
+	dev-python/pygobject:3[${PYTHON_USEDEP}]
+	>=x11-misc/ccsm-0.8[gtk3=,${PYTHON_USEDEP}]
+	<x11-misc/ccsm-0.9
 "
 
 python_prepare_all() {

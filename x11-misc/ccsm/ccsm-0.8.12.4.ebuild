@@ -11,13 +11,16 @@ DESCRIPTION="Compizconfig Settings Manager"
 HOMEPAGE="http://www.compiz.org/"
 SRC_URI="https://github.com/compiz-reloaded/${PN}/releases/download/v${PV}/${P}.tar.xz"
 
-LICENSE="GPL-2"
+LICENSE="GPL-2+"
 SLOT="0"
 KEYWORDS="amd64 ppc ppc64 x86"
+IUSE="gtk3"
 
 RDEPEND="
-	>=dev-python/compizconfig-python-${PV}[${PYTHON_USEDEP}]
-	>=dev-python/pygtk-2.12:2[${PYTHON_USEDEP}]
+	dev-python/pycairo[${PYTHON_USEDEP}]
+	>=dev-python/compizconfig-python-0.8.12[${PYTHON_USEDEP}]
+	<dev-python/compizconfig-python-0.9
+	dev-python/pygobject:3[${PYTHON_USEDEP}]
 	gnome-base/librsvg
 "
 

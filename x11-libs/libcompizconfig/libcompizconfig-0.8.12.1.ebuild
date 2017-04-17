@@ -8,7 +8,7 @@ DESCRIPTION="Compiz Configuration System"
 HOMEPAGE="http://www.compiz.org/"
 SRC_URI="https://github.com/compiz-reloaded/${PN}/releases/download/v${PV}/${P}.tar.xz"
 
-LICENSE="GPL-2"
+LICENSE="GPL-2+"
 SLOT="0"
 KEYWORDS="amd64 ppc ppc64 x86"
 
@@ -30,8 +30,7 @@ src_configure() {
 }
 
 src_install() {
-	emake DESTDIR="${D}" install
-	dodoc TODO
+	default
 	prune_libtool_files --all
 	echo > "${D}/etc/compizconfig/config" << EOF
 [gnome_session]

@@ -1,15 +1,15 @@
 # Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=5
+EAPI="6"
 
 inherit autotools eutils gnome2-utils
 
 DESCRIPTION="OpenGL window and compositing manager"
-HOMEPAGE="http://www.compiz.org/"
+HOMEPAGE="https://github.com/compiz-reloaded"
 SRC_URI="https://github.com/compiz-reloaded/${PN}/releases/download/v${PV}/${P}.tar.xz"
 
-LICENSE="GPL-2 LGPL-2.1 MIT"
+LICENSE="GPL-2+ LGPL-2.1 MIT"
 SLOT="0"
 KEYWORDS="amd64 ppc ppc64 x86"
 IUSE="+cairo dbus fuse mate gtk +svg"
@@ -72,6 +72,7 @@ RDEPEND="${COMMONDEPEND}
 DOCS=( AUTHORS ChangeLog NEWS README TODO )
 
 src_prepare() {
+	default
 	eautoreconf
 }
 
