@@ -13,6 +13,7 @@ LICENSE="GPL-2+"
 SLOT="0"
 KEYWORDS="amd64 ppc ppc64 x86"
 IUSE="libnotify"
+RESTRICT="mirror"
 
 RDEPEND="
 	gnome-base/librsvg
