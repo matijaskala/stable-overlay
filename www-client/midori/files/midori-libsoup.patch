@@ -1,6 +1,5 @@
-diff -ur midori-0.5.11/CMakeLists.txt midori-0.5.11_p/CMakeLists.txt
---- midori-0.5.11/CMakeLists.txt	2015-08-30 13:56:26.000000000 +0200
-+++ midori-0.5.11_p/CMakeLists.txt	2016-08-21 21:10:30.117983251 +0200
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
 @@ -112,13 +112,13 @@
                    sqlite3>=3.6.19
                    gmodule-2.0
@@ -27,9 +26,8 @@ diff -ur midori-0.5.11/CMakeLists.txt midori-0.5.11_p/CMakeLists.txt
      add_definitions("-DHAVE_LIBSOUP_2_48_0")
      set(VALAFLAGS ${VALAFLAGS} -D HAVE_LIBSOUP_2_48_0)
  endif ()
-diff -ur midori-0.5.11/extensions/cookie-manager/cookie-manager.c midori-0.5.11_p/extensions/cookie-manager/cookie-manager.c
---- midori-0.5.11/extensions/cookie-manager/cookie-manager.c	2015-08-30 13:56:26.000000000 +0200
-+++ midori-0.5.11_p/extensions/cookie-manager/cookie-manager.c	2016-08-19 23:19:20.000000000 +0200
+--- a/extensions/cookie-manager/cookie-manager.c
++++ b/extensions/cookie-manager/cookie-manager.c
 @@ -12,7 +12,7 @@
  #include "config.h"
  #include <midori/midori.h>
@@ -48,9 +46,8 @@ diff -ur midori-0.5.11/extensions/cookie-manager/cookie-manager.c midori-0.5.11_
  	g_free(filename);
  #else
  	SoupSession *session = webkit_get_default_session();
-diff -ur midori-0.5.11/midori/midori-session.c midori-0.5.11_p/midori/midori-session.c
---- midori-0.5.11/midori/midori-session.c	2015-08-30 13:56:26.000000000 +0200
-+++ midori-0.5.11_p/midori/midori-session.c	2016-08-19 23:56:30.000000000 +0200
+--- a/midori/midori-session.c
++++ b/midori/midori-session.c
 @@ -17,8 +17,8 @@
  #include "sokoke.h"
  
