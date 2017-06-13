@@ -48,6 +48,7 @@ DEPEND="${RDEPEND}
 
 src_prepare() {
 	eapply "${FILESDIR}"/${PN}-libsoup.patch #587448
+	eapply "${FILESDIR}"/${PN}-latest.patch
 	gnome2_src_prepare
 	vala_src_prepare
 	sed -i -e '/^install/s:COPYING:HACKING TODO TRANSLATE:' CMakeLists.txt || die
