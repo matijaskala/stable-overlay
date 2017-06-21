@@ -3,7 +3,7 @@
 
 EAPI="6"
 
-PYTHON_COMPAT=( python2_7 )
+PYTHON_COMPAT=( python{2_7,3_{4,5}} )
 inherit eutils python-r1
 
 DESCRIPTION="Compizconfig Python Bindings"
