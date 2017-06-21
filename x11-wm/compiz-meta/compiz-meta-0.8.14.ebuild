@@ -10,7 +10,7 @@ SRC_URI=""
 LICENSE="GPL-2+"
 SLOT="0"
 KEYWORDS="amd64 ppc ppc64 x86"
-IUSE="+ccsm emerald experimental +extra fusionicon gnome kde simpleccsm"
+IUSE="+ccsm emerald experimental +extra fusionicon simpleccsm"
 
 RDEPEND="
 	>=x11-wm/compiz-${PV}
@@ -19,8 +19,6 @@ RDEPEND="
 	extra? ( >=x11-plugins/compiz-plugins-extra-${PV} )
 	ccsm? ( >=x11-misc/ccsm-${PV} )
 	emerald? ( >=x11-wm/emerald-${PV} )
-	gnome? ( >=x11-libs/compizconfig-backend-gconf-${PV} )
-	kde? ( >=x11-libs/compizconfig-backend-kconfig4-${PV} )
-	fusionicon? ( >=x11-apps/fusion-icon-0.2.2 )
+	fusionicon? ( >=x11-apps/fusion-icon-0.2.4 )
 	simpleccsm? ( >=x11-misc/simple-ccsm-${PV} )
 "
