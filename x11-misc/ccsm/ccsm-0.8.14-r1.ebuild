@@ -3,7 +3,7 @@
 
 EAPI="6"
 
-PYTHON_COMPAT=( python2_7 )
+PYTHON_COMPAT=( python3_{4,5} )
 DISTUTILS_IN_SOURCE_BUILD=1
 inherit distutils-r1 gnome2-utils
 
@@ -14,7 +14,7 @@ SRC_URI="https://github.com/compiz-reloaded/${PN}/releases/download/v${PV}/${P}.
 LICENSE="GPL-2+"
 SLOT="0"
 KEYWORDS="amd64 ppc ppc64 x86"
-IUSE="gtk3"
+IUSE="+gtk3"
 
 RDEPEND="
 	dev-python/pycairo[${PYTHON_USEDEP}]

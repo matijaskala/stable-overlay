@@ -3,7 +3,7 @@
 
 EAPI="6"
 
-PYTHON_COMPAT=( python2_7 )
+PYTHON_COMPAT=( python3_{4,5} )
 DISTUTILS_IN_SOURCE_BUILD=1
 inherit distutils-r1 gnome2-utils
 
@@ -14,7 +14,7 @@ SRC_URI="https://github.com/compiz-reloaded/${PN}/releases/download/v${PV}/${P}.
 LICENSE="GPL-2+"
 SLOT="0"
 KEYWORDS="amd64 ppc ppc64 x86"
-IUSE="gtk3"
+IUSE="+gtk3"
 RESTRICT="mirror"
 
 DEPEND="
@@ -32,17 +32,15 @@ RDEPEND="
 python_prepare_all() {
 	# return error if wrong arguments passed to setup.py
 	sed -i -e 's/raise SystemExit/\0(1)/' setup.py || die 'sed on setup.py failed'
-	# fix desktop file
-	sed -i \
-		-e '/Categories/s/Compiz/X-\0/' \
-		-e '/Encoding/d' \
-		"${PN}".desktop.in || die "sed on ${PN}.desktop.in failed"
-
 	distutils-r1_python_prepare_all
 }
 
 python_configure_all() {
-	mydistutilsargs=( build --prefix=/usr )
+	mydistutilsargs=(
+		build \
+		--prefix=/usr \
+		--with-gtk=$(usex gtk3 3.0 2.0)
+	)
 }
 
 pkg_preinst() {
