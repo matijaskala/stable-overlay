@@ -1,42 +1,37 @@
-# Copyright 1999-2017 Gentoo Foundation
+# Copyright 1999-2020 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI="6"
+EAPI=7
 
-PYTHON_COMPAT=( python3_{4,5,6} )
+PYTHON_COMPAT=( python3_{6,7,8} )
 DISTUTILS_IN_SOURCE_BUILD=1
 inherit distutils-r1 gnome2-utils
 
-DESCRIPTION="Compizconfig Settings Manager"
+DESCRIPTION="Simplified Compizconfig Settings Manager"
 HOMEPAGE="http://www.compiz.org/"
-SRC_URI="https://github.com/compiz-reloaded/${PN}/releases/download/v${PV}/${P}.tar.xz"
+SRC_URI="https://github.com/compiz-reloaded/${PN}/archive/v${PV}.tar.gz -> ${P}.tar.gz"
 
 LICENSE="GPL-2+"
 SLOT="0"
 KEYWORDS="amd64 ppc ppc64 x86"
 IUSE="+gtk3"
+RESTRICT="mirror"
 
+BDEPEND="
+	dev-util/intltool
+	virtual/pkgconfig"
 RDEPEND="
-	dev-python/pycairo[${PYTHON_USEDEP}]
-	>=dev-python/compizconfig-python-0.8.12[${PYTHON_USEDEP}]
+	>=dev-python/compizconfig-python-0.8[${PYTHON_USEDEP}]
 	<dev-python/compizconfig-python-0.9
+	dev-python/pycairo[${PYTHON_USEDEP}]
 	dev-python/pygobject:3[${PYTHON_USEDEP}]
-	gnome-base/librsvg
+	>=x11-misc/ccsm-0.8[gtk3=,${PYTHON_USEDEP}]
+	<x11-misc/ccsm-0.9
 "
 
 python_prepare_all() {
 	# return error if wrong arguments passed to setup.py
 	sed -i -e 's/raise SystemExit/\0(1)/' setup.py || die 'sed on setup.py failed'
-
-	# correct gettext behavior
-	if [[ -n "${LINGUAS+x}" ]] ; then
-		for i in $(cd po ; echo *po | sed 's/\.po//g') ; do
-		if ! has ${i} ${LINGUAS} ; then
-			rm po/${i}.po || die
-		fi
-		done
-	fi
-
 	distutils-r1_python_prepare_all
 }
 
@@ -46,6 +41,10 @@ python_configure_all() {
 		--prefix=/usr \
 		--with-gtk=$(usex gtk3 3.0 2.0)
 	)
+}
+
+pkg_preinst() {
+	gnome2_icon_savelist
 }
 
 pkg_postinst() {
