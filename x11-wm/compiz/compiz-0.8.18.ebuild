@@ -41,6 +41,7 @@ DEPEND="
 "
 
 RDEPEND="${DEPEND}"
+
 BDEPEND="
 	virtual/pkgconfig
 	x11-base/xorg-proto

@@ -1,13 +1,13 @@
-# Copyright 1999-2017 Gentoo Foundation
+# Copyright 1999-2020 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI="6"
+EAPI=7
 
-inherit eutils flag-o-matic
+inherit autotools gnome2-utils
 
 DESCRIPTION="Emerald Window Decorator"
-HOMEPAGE="https://github.com/compiz-reloaded"
-SRC_URI="https://github.com/compiz-reloaded/${PN}/releases/download/v${PV}/${P}.tar.xz"
+HOMEPAGE="https://gitlab.com/compiz"
+SRC_URI="https://github.com/compiz-reloaded/${PN}/archive/v${PV}.tar.gz -> ${P}.tar.gz"
 
 LICENSE="GPL-2+"
 SLOT="0"
@@ -40,27 +40,30 @@ DEPEND="${RDEPEND}
 "
 
 src_prepare() {
-	# Fix pkg-config file pollution wrt #380197
-	eapply "${FILESDIR}"/${P}-pkgconfig-pollution.patch
-
-	# fix build with gtk+-2.22 - bug 341143
-	sed -i -e '/#define G[DT]K_DISABLE_DEPRECATED/s:^://:' \
-		include/emerald.h || die
-	# Fix underlinking
-	append-libs -ldl -lm
-
 	default
+	eautoreconf
 }
 
 src_configure() {
 	econf \
 		--disable-static \
-		--enable-fast-install \
 		--disable-mime-update \
 		--with-gtk=$(usex gtk3 3.0 2.0)
 }
 
 src_install() {
 	default
-	prune_libtool_files
+	find "${D}" -name '*.la' -delete || die
+}
+
+pkg_postinst() {
+	gnome2_icon_cache_update
+	xdg_desktop_database_update
+	xdg_mimeinfo_database_update
+}
+
+pkg_postrm() {
+	gnome2_icon_cache_update
+	xdg_desktop_database_update
+	xdg_mimeinfo_database_update
 }
